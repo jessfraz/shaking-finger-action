@@ -5,7 +5,7 @@ A GitHub action that displays a gif of Stephen Colbert shaking his finger to a p
 
 ```
 workflow "shaking finger action" {
-  on = "check_suite"
+  on = "check_run"
   resolves = ["post gif on fail"]
 }
 

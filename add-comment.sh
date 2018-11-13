@@ -21,30 +21,30 @@ AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 # Validate the GitHub token.
 curl -o /dev/null -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/repos/${GITHUB_REPOSITORY}" || { echo "Error: Invalid repo, token or network issue!";  exit 1; }
 
-# Get the check suite action.
+# Get the check run action.
 action=$(jq --raw-output .action "$GITHUB_EVENT_PATH")
 
 # If it's not completed return early.
 if [[ "$action" != "completed" ]]; then
 	# Return early we only care about completed.
-	echo "Check suite has action: $action"
+	echo "Check run has action: $action"
 	echo "Want: completed"
 	exit 0
 fi
 
-# Get the check suite conclusion.
-conclusion=$(jq --raw-output .check_suite.conclusion "$GITHUB_EVENT_PATH")
+# Get the check run conclusion.
+conclusion=$(jq --raw-output .check_run.conclusion "$GITHUB_EVENT_PATH")
 
 # If it's not a failure return early.
 if [[ "$conclusion" != "failure" ]]; then
 	# Return early we only care about failure.
-	echo "Check suite has conclusion: $conclusion"
+	echo "Check run has conclusion: $conclusion"
 	echo "Want: failure"
 	exit 0
 fi
 
-# Get the pull requests that goes with this check suite.
-pull_requests=( $(jq --raw-output .check_suite.pull_requests "$GITHUB_EVENT_PATH") )
+# Get the pull requests that goes with this check run.
+pull_requests=( $(jq --raw-output .check_run.check_suite.pull_requests "$GITHUB_EVENT_PATH") )
 
 # If we have no pull requests, return early.
 if [ ${#pull_requests[@]} -eq 0 ]; then
