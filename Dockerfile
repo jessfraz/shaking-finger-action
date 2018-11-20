@@ -8,7 +8,9 @@ LABEL "com.github.actions.color"="yellow"
 RUN apk add --no-cache \
 	bash \
 	ca-certificates \
-	curl
+	coreutils \
+	curl \
+	jq
 
 COPY add-comment.sh /usr/local/bin/add-comment
 
