@@ -1,5 +1,7 @@
 # Shaking Finger Action
 
+[![Travis CI](https://img.shields.io/travis/jessfraz/shaking-finger-action.svg?style=for-the-badge)](https://travis-ci.org/jessfraz/shaking-finger-action)
+
 A GitHub action that displays a gif of Stephen Colbert shaking his finger to a pull request on fail.
 
 It will also automatically clean up the comment when the build passes :)
