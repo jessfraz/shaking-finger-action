@@ -2,10 +2,12 @@
 
 A GitHub action that displays a gif of Stephen Colbert shaking his finger to a pull request on fail.
 
+It will also automatically clean up the comment when the build passes :)
+
 
 ```
 workflow "shaking finger action" {
-  on = "check_run"
+  on = "pull_request"
   resolves = ["post gif on fail"]
 }
 
@@ -14,3 +16,5 @@ action "post gif on fail" {
   secrets = ["GITHUB_TOKEN"]
 }
 ```
+
+![demo](demo.png)
