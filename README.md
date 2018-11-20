@@ -20,3 +20,12 @@ action "post gif on fail" {
 ```
 
 ![demo](demo.png)
+
+### Tests
+
+The tests use [shellcheck](https://github.com/koalaman/shellcheck). You don't
+need to install anything. They run in a container.
+
+```console
+$ make test
+```
