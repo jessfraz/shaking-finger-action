@@ -20,7 +20,7 @@ AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 GIF_URL=https://github.com/jessfraz/shaking-finger-action/raw/master/finger.gif
 
 delete_comment_if_exists() {
-	# Get all the comments for the pr.
+	# Get all the comments for the pull request.
 	body=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/repos/${GITHUB_REPOSITORY}/issues/${NUMBER}/comments")
 
 	comments=$(echo "$body" | jq --raw-output '.[] | {id: .id, body: .body} | @base64')
@@ -31,10 +31,10 @@ delete_comment_if_exists() {
 		b=$(echo "$comment" | jq --raw-output '.body')
 
 		if [[ "$b" == *"finger.gif"* ]]; then
-			# we have our comment.
-			# delete the comment.
+			# We have found our comment.
+			# Delete it.
 
-			echo "deleting old comment id $id"
+			echo "Deleting old comment ID: $id"
 			curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" -X DELETE "${URI}/repos/${GITHUB_REPOSITORY}/issues/comments/${id}"
 		fi
 	done
@@ -63,13 +63,13 @@ get_checks() {
 		fi
 
 		if [[ "$state" == "in_progress" ]]; then
-			# Continue if it's in progress
+			# Continue if it's in progress.
 			IN_PROGRESS=1
 			continue
 		fi
 
 		if [[ "$state" == "completed" ]] && [[ "$conclusion" == "failure" ]]; then
-			echo "check: $name failed, posting gif..."
+			echo "Check: $name failed. Posting gif..."
 
 			delete_comment_if_exists;
 			post_gif;
@@ -78,15 +78,15 @@ get_checks() {
 		fi
 	done
 
-	# if we got in progress checks then sleep and loop again.
+	# If we got in progress checks then sleep and loop again.
 	if [[ "$IN_PROGRESS" == "1" ]]; then
-		echo "in progress loop... sleeping..."
+		echo "In progress loop. Sleeping..."
 		sleep 2
 
 		get_checks;
 	fi
 
-	# we made it to the end and nothing failed so let's delete the comment if it
+	# We made it to the end and nothing failed so let's delete the comment if it
 	# exists.
 	delete_comment_if_exists;
 }
