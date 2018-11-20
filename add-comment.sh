@@ -18,7 +18,7 @@ API_VERSION=v3
 API_HEADER="Accept: application/vnd.github.${API_VERSION}+json; application/vnd.github.antiope-preview+json"
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 
-GIF_URL=https://github.com/jessfraz/web-of-trust-demo/raw/master/.github/actions/shaking-finger/finger.gif
+GIF_URL=https://github.com/jessfraz/shaking-finger-action/raw/master/finger.gif
 
 delete_comment_if_exists() {
 	# Get all the comments for the pr.
