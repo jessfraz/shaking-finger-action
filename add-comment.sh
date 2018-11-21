@@ -98,11 +98,11 @@ main() {
 	# Get the check run action.
 	action=$(jq --raw-output .action "$GITHUB_EVENT_PATH")
 
-	# If it's not synchronize return early.
-	if [[ "$action" != "synchronize" ]]; then
-		# Return early we only care about synchronize.
+	# If it's not synchronize or opened event return early.
+	if [[ "$action" != "synchronize" ]] && [[ "$action" != "opened" ]]; then
+		# Return early we only care about synchronize or opened.
 		echo "Check run has action: $action"
-		echo "Want: synchronize"
+		echo "Want: synchronize or opened"
 		exit 0
 	fi
 
