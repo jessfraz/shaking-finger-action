@@ -10,6 +10,10 @@ It will also automatically clean up the comment when the build passes :)
 
 <!-- toc -->
 
+- [Usage](#usage)
+- [Contributing](#contributing)
+  * [Running the tests](#running-the-tests)
+
 <!-- tocstop -->
 
 ## Usage
