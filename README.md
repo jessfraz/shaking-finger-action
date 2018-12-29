@@ -6,6 +6,13 @@ A GitHub action that displays a gif of Conan O'Brien shaking his finger to a pul
 
 It will also automatically clean up the comment when the build passes :)
 
+**Table of Contents**
+
+<!-- toc -->
+
+<!-- tocstop -->
+
+## Usage
 
 ```
 workflow "shaking finger action" {
@@ -21,7 +28,9 @@ action "post gif on fail" {
 
 ![demo](demo.png)
 
-### Tests
+## Contributing
+
+### Running the tests
 
 The tests use [shellcheck](https://github.com/koalaman/shellcheck). You don't
 need to install anything. They run in a container.
